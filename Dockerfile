@@ -23,8 +23,6 @@ ENV REMOTE_REGISTRY_SKIMDB='https://skimdb.npmjs.com/registry'
 RUN mkdir -p ${DATA_DIRECTORY} chmod 700 ${DATA_DIRECTORY} \
     && chown -R local-npm ${DATA_DIRECTORY}
 
-RUN npm start -- --remote ${REMOTE_REGISTRY} --remote-skim ${REMOTE_REGISTRY_SKIMDB} --directory ${DATA_DIRECTORY} --url-base ${BASE_URL}
-
 COPY ./tools/start-packages /usr/local/bin/start-packages
 RUN dos2unix /usr/local/bin/start-packages \
     && chmod +x /usr/local/bin/start-packages
