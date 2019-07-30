@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "Process Start-packages Started ..."
+
+echo "Process Start-packages Complete ..."
+tail -f /var/log/faillog
