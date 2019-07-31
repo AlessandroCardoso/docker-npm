@@ -24,7 +24,6 @@ RUN mkdir -p ${DATA_DIRECTORY} chmod 700 ${DATA_DIRECTORY} \
     && chown -R local-npm ${DATA_DIRECTORY}
 
 COPY ./tools/start-packages /usr/local/bin/start-packages
-RUN dos2unix /usr/local/bin/start-packages \
-    && chmod +x /usr/local/bin/start-packages
+RUN chmod +x /usr/local/bin/start-packages
 
 CMD ["/usr/local/bin/start-packages"]
