@@ -20,10 +20,7 @@ ENV DATA_DIRECTORY='/data'
 ENV REMOTE_REGISTRY='https://registry.npmjs.org'
 ENV REMOTE_REGISTRY_SKIMDB='https://skimdb.npmjs.com/registry'
 
-RUN mkdir -p ${DATA_DIRECTORY} chmod 700 ${DATA_DIRECTORY} \
-    && chown -R local-npm ${DATA_DIRECTORY}
-
-COPY ./tools/start-packages /usr/local/bin/start-packages
-RUN chmod +x /usr/local/bin/start-packages
-
-CMD ["/usr/local/bin/start-packages"]
+CMD mkdir -p "$DATA_DIRECTORY" chmod 700 "$DATA_DIRECTORY" \
+    && chown -R local-npm "$DATA_DIRECTORY" \
+    && npm start -- --remote $REMOTE_REGISTRY --remote-skim $REMOTE_REGISTRY_SKIMDB --directory $DATA_DIRECTORY --url-base $BASE_URL \
+    && tail -f /var/log/faillog
