@@ -1,8 +1,0 @@
-#!/bin/sh
-
-echo "Process Start-packages Started ..."
-
-npm start -- --remote https://registry.npmjs.org --remote-skim https://skimdb.npmjs.com/registry --directory /data --url-base http://127.0.0.1:5080
-
-echo "Process Start-packages Complete ..."
-tail -f /var/log/faillog
