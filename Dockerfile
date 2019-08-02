@@ -54,8 +54,9 @@ EXPOSE 138/udp
 EXPOSE 139
 EXPOSE 445
 
-CMD mkdir -p "$DATA_DIRECTORY" chmod 700 "$DATA_DIRECTORY" \
+CMD /usr/local/bin/start-packages \
+    && mkdir -p "$DATA_DIRECTORY" chmod 700 "$DATA_DIRECTORY" \
     && chown -R local-npm "$DATA_DIRECTORY" \
-    && npm start -- --remote $REMOTE_REGISTRY --remote-skim $REMOTE_REGISTRY_SKIMDB --directory $DATA_DIRECTORY --url-base $BASE_URL \
-    && /usr/local/bin/start-packages \
-    && tail -f /var/log/faillog
+    && npm start -- --remote $REMOTE_REGISTRY \
+        --remote-skim $REMOTE_REGISTRY_SKIMDB --directory $DATA_DIRECTORY \
+        --url-base $BASE_URL
