@@ -13,11 +13,6 @@ RUN apt-get clean
 ENV VOL_DIR=/etc/i9corp
 ENV SMB_DIR=${VOL_DIR}/samba
 
-ENV BASE_URL='http://127.0.0.1:5080'
-ENV DATA_DIRECTORY='/data'
-ENV REMOTE_REGISTRY='https://registry.npmjs.org'
-ENV REMOTE_REGISTRY_SKIMDB='https://skimdb.npmjs.com/registry'
-
 RUN mkdir -p ${SMB_DIR}
 
 RUN groupadd -r local-npm --gid=999 \
@@ -38,12 +33,6 @@ RUN dos2unix /usr/local/bin/start-packages \
 RUN cp /etc/samba/smb.conf /etc/samba/smb.conf.bkp
 COPY  ./samba/smb.conf /etc/samba/smb.conf
 RUN dos2unix /etc/samba/smb.conf
-
-RUN mkdir -p "$DATA_DIRECTORY" chmod 700 "$DATA_DIRECTORY" \
-    && chown -R local-npm "$DATA_DIRECTORY" \
-    && npm start -- --remote $REMOTE_REGISTRY \
-        --remote-skim $REMOTE_REGISTRY_SKIMDB --directory $DATA_DIRECTORY \
-        --url-base $BASE_URL
 
 VOLUME /data
 
