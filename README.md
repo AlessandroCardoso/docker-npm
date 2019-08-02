@@ -1,0 +1,1 @@
+docker run -d -v repo-npm:/data -p 60080:5080 -p 60022:22 -p 60021:21 -p 60137:137 -p 60138:138 -p 60139:139 -p 60445:445 --name repo-rpm acardosoi9/repo-npm:latest
