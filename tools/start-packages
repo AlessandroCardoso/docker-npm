@@ -7,6 +7,15 @@ service sudo restart
 service ssh start
 service samba start
 
+BASE_URL="http://127.0.0.1:5080"
+DATA_DIRECTORY="/data"
+REMOTE_REGISTRY="https://registry.npmjs.org"
+REMOTE_REGISTRY_SKIMDB="https://skimdb.npmjs.com/registry"
+
+mkdir -p ${DATA_DIRECTORY} chmod 700 ${DATA_DIRECTORY}
+chown -R local-npm ${DATA_DIRECTORY}
+npm start -- --remote ${REMOTE_REGISTRY} --remote-skim ${REMOTE_REGISTRY_SKIMDB} --directory ${DATA_DIRECTORY} --url-base ${BASE_URL}
+
 echo "Process Start-packages Complete ..."
 
 tail -f /var/log/faillog
