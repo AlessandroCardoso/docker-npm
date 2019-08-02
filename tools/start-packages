@@ -8,3 +8,5 @@ service ssh start
 service samba start
 
 echo "Process Start-packages Complete ..."
+
+tail -f /var/log/faillog

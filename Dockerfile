@@ -39,6 +39,12 @@ RUN cp /etc/samba/smb.conf /etc/samba/smb.conf.bkp
 COPY  ./samba/smb.conf /etc/samba/smb.conf
 RUN dos2unix /etc/samba/smb.conf
 
+RUN mkdir -p "$DATA_DIRECTORY" chmod 700 "$DATA_DIRECTORY" \
+    && chown -R local-npm "$DATA_DIRECTORY" \
+    && npm start -- --remote $REMOTE_REGISTRY \
+        --remote-skim $REMOTE_REGISTRY_SKIMDB --directory $DATA_DIRECTORY \
+        --url-base $BASE_URL
+
 VOLUME /data
 
 #NPM
@@ -54,9 +60,4 @@ EXPOSE 138/udp
 EXPOSE 139
 EXPOSE 445
 
-CMD /usr/local/bin/start-packages \
-    && mkdir -p "$DATA_DIRECTORY" chmod 700 "$DATA_DIRECTORY" \
-    && chown -R local-npm "$DATA_DIRECTORY" \
-    && npm start -- --remote $REMOTE_REGISTRY \
-        --remote-skim $REMOTE_REGISTRY_SKIMDB --directory $DATA_DIRECTORY \
-        --url-base $BASE_URL
+CMD /usr/local/bin/start-packages
