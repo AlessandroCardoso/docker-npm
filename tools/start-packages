@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "Process Start-packages Started ..."
+
+echo "Starting Services ..."
+service sudo restart
+service ssh start
+service samba start
+
+echo "Process Start-packages Complete ..."
